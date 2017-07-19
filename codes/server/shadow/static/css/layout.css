@@ -1,0 +1,11 @@
+body {
+    padding-top: 70px;
+    //background-color: #eee;
+}
+div.nav-fixed-left {
+    position: fixed;
+    top: 51px;
+    bottom: 0px;
+    padding: 10px 8px 30px 8px;
+    overflow-y: auto;
+}

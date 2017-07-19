@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}{% trans 'title.shadow' %}{% endblock %}
+{% block links %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">{% trans 'title.shadow' %}</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'dashboard:index' %}">{% trans 'navbar.dashboard' %}</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans 'navbar.agent.manage' %} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'agent:list' %}">{% trans 'menu.agent.list' %}</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans 'navbar.policy.manage' %} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans 'navbar.log.analysis' %} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans 'navbar.system.manage' %} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ LANGUAGE_CODE|language_name_local }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        {% for language in languages %}
+                            {% if language.code != LANGUAGE_CODE %}
+                                <li><a href="javascript:void(0)" data-language="{{ language.code }}" >{{ language.name_local }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  {{ user.username }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">{% trans 'btn.change.password' %}</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{% url 'account:logout' %}">{% trans 'btn.logout' %}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            {% block container %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+jQuery(document).ready(function() {
+    jQuery("a[data-language]").on("click", function() {
+        var language = jQuery(this).data("language");
+        ajax_post("{% url 'set_language' %}",
+                    {'language' : language, 'csrfmiddlewaretoken' : "{{ csrf_token }}"},
+                    function(reponse, status, xhr) {
+                        window.location.replace("{{ request.path }}");
+                    });
+    });
+});
+{% endblock %}

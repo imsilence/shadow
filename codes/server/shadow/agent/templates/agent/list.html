@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+
+{% block container %}
+<table class="table table-bordered table-striped table-hover display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans 'thead.client.hostname' %}</th>
+            <th>{% trans 'thead.client.ip' %}</th>
+            <th>{% trans 'thead.client.os' %}</th>
+            <th>{% trans 'thead.client.time' %}</th>
+            <th>{% trans 'thead.operate' %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+
+jQuery(document).ready(function() {
+    var table = jQuery('table').DataTable({
+        "ajax" : {
+            "url" : "{% url 'agent:list' %}",
+            "dataSrc" : "result",
+        },
+        columns : [
+            {
+                'data' : function(row, type, set, meta) {
+                    if(row['is_online']) {
+                        return row['hostname'];
+                    } else {
+                        return '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>' + row['hostname'];
+                    }
+                }
+            },
+            {
+                'data' : function(row, type, set, meta) {
+                    var interfaces = row['interfaces'];
+                    for(var i=0, j=interfaces.length; i < j; i++) {
+                        if(interfaces[i]['ips'].length > 0) {
+                            return interfaces[i]['ips'][0];
+                        }
+
+                    }
+                    return '';
+                }
+            },
+            {
+                'data' : function(row, type, set, meta) {
+                    return '{os} / {arch}'.replace('{os}', row['os']).replace('{arch}', row['arch']);
+                }
+            },
+            {'data' : 'client_time'},
+            {
+                'data' : function(row, type, set, meta) {
+                    var buttons = [
+                        '<a role="button" class="btn btn-danger btn-xs btn-delete" data-id="{id}">{% trans "button.delete" %}</a>'.replace('{id}', row['id']),
+                    ];
+                    return buttons.join('');
+                }
+            }
+        ]
+    });
+
+    jQuery("table").on('click', 'a.btn-delete', function() {
+        var id = jQuery(this).data('id');
+        swal({
+            title: "{% trans 'title.makesure.delete' %}",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            cancelButtonText: "{% trans 'btn.cancel' %}",
+            confirmButtonText: "{% trans 'btn.makesuer' %}",
+            closeOnConfirm: false
+        }, function(){
+            jQuery.post("{% url 'agent:delete' %}",
+                        {'id' : id, 'csrfmiddlewaretoken' : "{{ csrf_token }}"},
+                        function(data){
+                            table.ajax.reload();
+                            swal("{% trans 'title.success.delete' %}", "", "success");
+                        },
+                        'json');
+        });
+    });
+
+    setInterval(function() {
+        table.ajax.reload();
+    }, 10 * 1000);
+});
+{% endblock %}

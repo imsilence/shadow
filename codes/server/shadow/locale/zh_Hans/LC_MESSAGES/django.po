@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-12 14:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\account\forms.py:10
+msgid "Please enter a correct username and password."
+msgstr "用户名或密码错误"
+
+#: .\account\forms.py:12
+msgid "This account is inactive."
+msgstr "用户名或密码错误"
+
+#: .\account\templates\account\login.html:4
+#: .\account\templates\account\login.html:21
+msgid "title.login"
+msgstr "用户登录"
+
+#: .\account\templates\account\login.html:36
+msgid "label.username"
+msgstr "用户名"
+
+#: .\account\templates\account\login.html:38
+msgid "placeholder.username"
+msgstr "用户名"
+
+#: .\account\templates\account\login.html:42
+msgid "label.password"
+msgstr "密码"
+
+#: .\account\templates\account\login.html:44
+msgid "placeholder.password"
+msgstr "密码"
+
+#: .\account\templates\account\login.html:48
+msgid "label.language"
+msgstr "语言"
+
+#: .\account\templates\account\login.html:62
+msgid "btn.login"
+msgstr "登录"
+
+#: .\agent\templates\agent\list.html:9
+msgid "thead.client.hostname"
+msgstr "主机名"
+
+#: .\agent\templates\agent\list.html:10
+msgid "thead.client.ip"
+msgstr "IP地址"
+
+#: .\agent\templates\agent\list.html:11
+msgid "thead.client.os"
+msgstr "操作系统"
+
+#: .\agent\templates\agent\list.html:12
+msgid "thead.client.time"
+msgstr "终端时间"
+
+#: .\agent\templates\agent\list.html:13
+msgid "thead.operate"
+msgstr "操作"
+
+#: .\agent\templates\agent\list.html:61
+msgid "button.edit"
+msgstr "编辑"
+
+#: .\agent\templates\agent\list.html:62
+msgid "button.delete"
+msgstr "删除"
+
+#: .\agent\templates\agent\list.html:73
+msgid "title.makesure.delete"
+msgstr "确定删除吗?"
+
+#: .\agent\templates\agent\list.html:78
+msgid "btn.cancel"
+msgstr "取消"
+
+#: .\agent\templates\agent\list.html:79
+msgid "btn.makesuer"
+msgstr "确定"
+
+#: .\agent\templates\agent\list.html:86
+msgid "title.success.delete"
+msgstr "删除成功"
+
+#: .\shadow\settings.py:148
+msgid "en"
+msgstr "英文"
+
+#: .\shadow\settings.py:149
+msgid "zh_Hans"
+msgstr "中文简体"
+
+#: .\templates\layout.html:6 .\templates\layout.html:21
+msgid "title.shadow"
+msgstr "Shadow"
+
+#: .\templates\layout.html:25
+msgid "navbar.dashboard"
+msgstr "Dashboard"
+
+#: .\templates\layout.html:27
+msgid "navbar.agent.manage"
+msgstr "终端管理"
+
+#: .\templates\layout.html:29
+msgid "menu.agent.list"
+msgstr "终端列表"
+
+#: .\templates\layout.html:33
+msgid "navbar.policy.manage"
+msgstr "策略管理"
+
+#: .\templates\layout.html:38
+msgid "navbar.log.analysis"
+msgstr "日志分析"
+
+#: .\templates\layout.html:43
+msgid "navbar.system.manage"
+msgstr "系统管理"
+
+#: .\templates\layout.html:65
+msgid "btn.change.password"
+msgstr "修改密码"
+
+#: .\templates\layout.html:67
+msgid "btn.logout"
+msgstr "退出"
+
+#~ msgid "label.no.data"
+#~ msgstr "无数据"
+
+#~ msgid "label.login.user"
+#~ msgstr "用户"
